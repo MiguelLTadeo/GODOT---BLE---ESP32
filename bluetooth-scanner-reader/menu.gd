@@ -16,4 +16,3 @@ func _on_conectar_esp_32_miguel_pressed() -> void:
 
 func _on_desconectar_pressed() -> void:
 	Bluetooth._exit_tree()
-	pass # Replace with function body.

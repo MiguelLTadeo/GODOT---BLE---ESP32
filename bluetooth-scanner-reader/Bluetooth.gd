@@ -36,9 +36,12 @@ func conect(nome_disp: String):
 	bluetooth_manager.initialize()
 
 func _on_initialized(success: bool, error: String):
+	#o erro sai em mandarimkk
 	#faz um scan de dispositivos por 2 segundos
 	if success:
 		bluetooth_manager.start_scan(2.0)
+	else:
+		print("Erro na inicialização do bluetooth!")
 
 func _on_device_found(info: Dictionary):
 	#Comparação entre o nome dos dispositivos encontrados com o dispositivo alvo

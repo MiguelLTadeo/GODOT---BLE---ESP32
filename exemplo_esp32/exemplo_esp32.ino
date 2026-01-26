@@ -76,8 +76,8 @@ void loop() {
       
         // Define o valor e envia a notificação
         pCharacteristic->setValue(texto.c_str());
-        pCharacteristic->notify(); 
-      
+          pCharacteristic->notify(); 
+        
         Serial.print("Notificação enviada: ");
         Serial.println(texto);
       }

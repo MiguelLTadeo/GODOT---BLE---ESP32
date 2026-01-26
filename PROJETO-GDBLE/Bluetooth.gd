@@ -2,12 +2,12 @@ extends Node
 
 var bluetooth_manager: BluetoothManager
 #Nome padrão para conexão
-@export var target_device_name: String = "teste_blu"
+@export var target_device_name: String = "ESP32_MPU_BLE"
 var device: BleDevice
 
 const UUID_SERVICO = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 const UUID_CHAR    = "beb5483e-36e1-4688-b7f5-ea07361b26a8"
-
+	
 #Variável global para acesso a leitura
 @export var posicao: String = "3"
 
@@ -18,7 +18,6 @@ func conectar(nome_disp: String):
 	bluetooth_manager = BluetoothManager.new()
 	#adição do nó bluetooth manager
 	add_child(bluetooth_manager)
-		
 	#Com a inicialização do adaptador bluetooth, a função _on_initialized é chamada
 	bluetooth_manager.adapter_initialized.connect(_on_initialized)
 		
@@ -47,6 +46,7 @@ func _on_initialized(success: bool, error: String):
 func _on_device_found(info: Dictionary):
 	#Comparação entre o nome dos dispositivos encontrados com o dispositivo alvo
 	var name_device = info.get("name", "")
+	print(info.get("name",""))
 	if name_device == target_device_name:
 		print("Dispositivo alvo encontrado!")
 		bluetooth_manager.stop_scan()	
@@ -74,10 +74,11 @@ func connect_to_target(address: String):
 		#Conexão assíncrona ao dispositivo
 		device.connect_async()
 		
-func _on_services_found(_services:Array):
+func _on_services_found(services:Array):
 	#Usamos a função subscribe_characteristic para inscrever a notificações 
 	#da característica que temos como alvo
 	print("Serviços encontrados.")
+	print(services)
 	device.subscribe_characteristic(UUID_SERVICO, UUID_CHAR)
 
 func _on_data_update(char_uuid: String, data: PackedByteArray):

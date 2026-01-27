@@ -2,7 +2,7 @@ extends Node
 
 var bluetooth_manager: BluetoothManager
 #Nome padrão para conexão
-@export var target_device_name: String = "ESP32_MPU_BLE"
+@export var target_device_name: String = "teste_blu"
 var device: BleDevice
 
 const UUID_SERVICO = "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
